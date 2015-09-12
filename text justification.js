@@ -21,8 +21,16 @@ var fullJustify = function(words, maxWidth) {
   }
   
   lines = lines.map(function(line, i, array) {
-    if (line.length === 1 || i === array.length - 1) {
+    if (line.length === 1) {
       line = line[0];
+      while (line.length < maxWidth) {
+        line += " ";
+      }
+      return line;
+    }
+
+    if (i === array.length - 1) {
+      line = line.join(' ');
       while (line.length < maxWidth) {
         line += " ";
       }
@@ -57,4 +65,4 @@ function makeSeparator(n) {
   return output;
 }
 
-console.log(fullJustify(["This", "is", "an", "example", "of", "text", "justification."], 22));
+console.log(fullJustify(["This", "is", "an", "example", "of", "text", "justification."], 16));
