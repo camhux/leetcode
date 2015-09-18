@@ -16,20 +16,22 @@
  };
 
  //[1,2,3,4]
-var sortedArrayToBST = function(nums, low, high) {
-  low = low || 0;
-  high = high || nums.length - 1;
+var sortedArrayToBST = function(nums, low, high) { 
+  if (low === undefined) {
+    low = 0;
+  }
+  if (high === undefined) {
+    high = nums.length - 1;
+  }
 
+  if (high < low) return null;
+  if (high === low) return new TreeNode(nums[low]);
 
-  var center = Math.ceil((high - low) / 2);
+  var center = Math.floor((high - low )/ 2) + low;
   var rootNode = new TreeNode(nums[center]);
-
-  console.log(low, high);
 
   rootNode.left = sortedArrayToBST(nums, low, center - 1);
   rootNode.right = sortedArrayToBST(nums, center + 1, high);
 
   return rootNode;
 };
-
-console.log(sortedArrayToBST([-90, -80, -50, -10, 0, 5, 10, 15, 20, 25, 30]));
