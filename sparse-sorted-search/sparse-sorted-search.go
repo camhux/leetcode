@@ -8,6 +8,7 @@ func Search(array []string, target string) int {
 	high = n - 1
 
 	for low < high {
+
 		mid = (high-low)/2 + low
 
 		if array[mid] == "" {
@@ -42,14 +43,13 @@ func Search(array []string, target string) int {
 			}
 		}
 
-		if array[mid] == target {
+		switch s := array[mid]; {
+		case s == target:
 			return mid
-		}
-		if array[mid] > target {
+		case s > target:
 			high = mid - 1
 			continue
-		}
-		if array[mid] < target {
+		case s < target:
 			low = mid + 1
 			continue
 		}

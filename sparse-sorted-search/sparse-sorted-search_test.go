@@ -27,6 +27,18 @@ var cases = []Test{
 		"unfound",
 		-1,
 	},
+
+	{
+		[]string{"at", "", "", "", "ball", "", "", "car", "", "", "dad", "", ""},
+		"ball",
+		4,
+	},
+
+	{
+		[]string{"at", "", "", "", "ball", "", "", "car", "", "", "dad", "", ""},
+		"dog",
+		-1,
+	},
 }
 
 func TestSearch(t *testing.T) {
