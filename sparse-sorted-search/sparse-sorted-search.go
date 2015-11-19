@@ -1,5 +1,7 @@
 package sparse
 
+import "sync"
+
 func Search(array []string, target string) int {
 	var n, low, mid, high int
 
@@ -16,13 +18,25 @@ func Search(array []string, target string) int {
 			lBound = mid
 			rBound = mid
 
-			for array[lBound] == "" && lBound > 0 {
-				lBound--
-			}
+			var wg sync.WaitGroup
 
-			for array[rBound] == "" && rBound < n-1 {
-				rBound++
-			}
+			wg.Add(2)
+
+			go func() {
+				for array[lBound] == "" && lBound > 0 {
+					lBound--
+				}
+				wg.Done()
+			}()
+
+			go func() {
+				for array[rBound] == "" && rBound < n-1 {
+					rBound++
+				}
+				wg.Done()
+			}()
+
+			wg.Wait()
 
 			left := array[lBound]
 			right := array[rBound]
